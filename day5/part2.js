@@ -4,6 +4,7 @@ const Parallel = require('paralleljs');
 
 // Not a good solution - I had to run it with split input in parallel and tried every result that came
 // I can also run them with the original input and it will take 4-5 hours to run
+const start = performance.now();
 
 const filePath = 'input2';
 const input= fs.readFileSync(filePath).toString()
@@ -24,11 +25,11 @@ for (let i = 2; i < splitInput.length; i++) {
 
 let seedTuples = []
 for (let i = 0; i < seeds.length; i += 2) {
-    seedTuples.push([seeds[i], seeds[i + 1], maps])
+    seedTuples.push([seeds[i], seeds[i + 1], maps, start])
 }
 
 const job = new Parallel(seedTuples)
-job.map(([seedStart, offset, maps]) => {
+job.map(([seedStart, offset, maps, start]) => {
     let min = Infinity
     for (let j = 0; j < offset; j++) {
         const seed = seedStart + j
@@ -47,7 +48,11 @@ job.map(([seedStart, offset, maps]) => {
         min = Math.min(min, result)
     }
     console.log("Found result of seed " + seedStart + " to be " + min)
-    return min
+    return [min, start]
 }).then((data) => {
-    console.log("Best result is:" + Math.min(...data))
+    const result = data.map(x => parseInt(x[0]))
+    console.log("Best result is:" + Math.min(...result))
+    const start = Math.max(...data.map(x => parseInt(x[1])))
+    const end = performance.now();
+    console.log(`Execution time: ${end - start} ms`);
 })
