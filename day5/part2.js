@@ -2,6 +2,7 @@ const fs = require('fs');
 
 
 // Not a good solution - I had to run it with split input in parallel and tried every result that came
+// I can also run them with the original input and it will take 4-5 hours to run
 
 const filePath = 'input2';
 const input= fs.readFileSync(filePath).toString()
