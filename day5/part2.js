@@ -1,4 +1,5 @@
 const fs = require('fs');
+const Parallel = require('paralleljs');
 
 
 // Not a good solution - I had to run it with split input in parallel and tried every result that came
@@ -21,9 +22,14 @@ for (let i = 2; i < splitInput.length; i++) {
     maps.push(entry)
 }
 
-let min = Infinity
+let seedTuples = []
 for (let i = 0; i < seeds.length; i += 2) {
-    const [seedStart, offset ] = [seeds[i], seeds[i + 1]]
+    seedTuples.push([seeds[i], seeds[i + 1], maps])
+}
+
+const job = new Parallel(seedTuples)
+job.map(([seedStart, offset, maps]) => {
+    let min = Infinity
     for (let j = 0; j < offset; j++) {
         const seed = seedStart + j
         let result = seed
@@ -40,6 +46,8 @@ for (let i = 0; i < seeds.length; i += 2) {
         // console.log(result)
         min = Math.min(min, result)
     }
-    console.log(min)
-}
-console.log(min)
+    console.log("Found result of seed " + seedStart + " to be " + min)
+    return min
+}).then((data) => {
+    console.log("Best result is:" + Math.min(...data))
+})
