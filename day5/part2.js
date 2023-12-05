@@ -22,23 +22,6 @@ for (let i = 2; i < splitInput.length; i++) {
 }
 
 let min = Infinity
-
-// const scan = (current, offset, remainingMaps) => {
-//     let result = Infinity
-//     const [currentMap, restOfMaps] = [remainingMaps[0], remainingMaps.slice(1)]
-//     for (let i = current; i < current - offset; i++) {
-//         let found = i
-//         let foundMap = currentMap.filter(([dest, source, range]) => {
-//             return i >= source && i <= source + range
-//         })
-//         if (foundMap) {
-//             found = foundMap[0][0] + i - foundMap[0][1]
-//         }
-//         result = Math.min()
-//         i = Math.min(i, found)
-//     }
-// }
-
 for (let i = 0; i < seeds.length; i += 2) {
     const [seedStart, offset ] = [seeds[i], seeds[i + 1]]
     for (let j = 0; j < offset; j++) {
