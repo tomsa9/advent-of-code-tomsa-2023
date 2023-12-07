@@ -108,8 +108,6 @@ const compareHands = (hand1, hand2) => {
 const sortedHands = hands.sort(compareHands)
 console.log(sortedHands)
 
-const result = sortedHands.reduce((acc, {cards, bid}, index) =>
-    acc + ((index + 1) * bid)
-, 0)
+const result = sortedHands.reduce((acc, {cards, bid}, index) => acc + ((index + 1) * bid), 0)
 
 console.log("result: " + result)
