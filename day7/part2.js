@@ -104,8 +104,6 @@ const hands = input.map(x => {
 
 const compareHands = (hand1, hand2) => {
     const funcs = [fiveOfAKind, fourOfAKind, fullHouse, threeOfAKind, twoPair, onePair, highCard]
-    if (JSON.stringify(hand1.cards) === JSON.stringify('Q2KJJ'.split('')))
-        console.log("hi")
     for (let i = 0; i < funcs.length; i++) {
         const func = funcs[i]
         const hand1Result = func(hand1.cards)
