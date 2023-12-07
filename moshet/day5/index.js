@@ -1,21 +1,19 @@
-const fs = require("fs");
-
-const input = fs.readFileSync("input2").toString()
+const input = require("./input");
 const _ = require("lodash");
 
 const rows = input.split("\n");
 // let seeds = rows.splice(0,1)[0].split(" ").slice(1).map(num => Number(num));
 let seeds = rows.splice(0,1)[0].split(" ").slice(1).map(num => Number(num))
     .reduce((result, num) => {
-        if(!result[0] || result[result.length-1].range) {
-            result.push({start: num});
-        }
-        else {
-            result[result.length-1].range = num;
-            result[result.length-1].end = result[result.length-1].start + result[result.length-1].range-1;
-        }
-        return result;
-    },[]);
+    if(!result[0] || result[result.length-1].range) {
+        result.push({start: num});
+    }
+    else {
+        result[result.length-1].range = num;
+        result[result.length-1].end = result[result.length-1].start + result[result.length-1].range-1;
+    }
+    return result;
+},[]);
 console.log(seeds);
 let maps = {};
 let currentMap = "";
