@@ -62,7 +62,7 @@ const twoPair = hand => {
     return foundTwo && foundAnotherTwo
 }
 
-const onePar = hand => {
+const onePair = hand => {
     for (const [, value] of Object.entries(cardsMap(hand))) {
         if (value === 2) return true
     }
@@ -88,19 +88,19 @@ const hands = input.map(x => {
 })
 
 const compareHands = (hand1, hand2) => {
-    const funcs = [fiveOfAKind, fourOfAKind, fullHouse, threeOfAKind, twoPair, onePar, highCard]
+    const funcs = [fiveOfAKind, fourOfAKind, fullHouse, threeOfAKind, twoPair, onePair, highCard]
     for (let i = 0; i < funcs.length; i++) {
         const func = funcs[i]
         const hand1Result = func(hand1.cards)
         const hand2Result = func(hand2.cards)
-        if (hand1Result && !hand2Result) return 1
-        else if (!hand1Result && hand2Result) return -1
-        else if (hand1Result && hand2Result) break
+        const result = hand1Result - hand2Result
+        if (result !== 0) return result
+        if (hand1Result && hand2Result) break
     }
     for (let i = 0; i < hand1.cards.length; i++) {
         const [card1, card2] = [power(hand1.cards[i]), power(hand2.cards[i])]
-        if (card2 > card1) return -1
-        else if (card2 < card1) return 1
+        const result = card1 - card2
+        if (result !== 0) return result
     }
     return 0
 }
