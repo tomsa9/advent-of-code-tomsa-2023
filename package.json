@@ -1,8 +1,8 @@
 {
-  "name": "AdventOfCode",
+  "name": "advent-of-code",
   "version": "1.0.0",
   "dependencies": {
     "lodash": "^4.17.21",
-    "paralleljs": "^1.1.0"
+    "mathjs": "^12.2.0"
   }
 }
