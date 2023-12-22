@@ -5,6 +5,7 @@
     "lodash": "^4.17.21",
     "lodash-transpose": "^0.2.1",
     "mathjs": "^12.2.0",
+    "node-dijkstra": "^2.5.0",
     "paralleljs": "^1.1.0"
   }
 }
